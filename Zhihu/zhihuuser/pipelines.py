@@ -34,5 +34,6 @@ class MongoPipeline(object):
         self.client.close()
 
     def process_item(self, item, spider):
+        item['url'] = 'http://www.zhihu.com/people/'+item.get('id')
         self.db[self.collection_name].update({'url_token': item['url_token']}, dict(item), True)
         return item
