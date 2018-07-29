@@ -3,25 +3,25 @@
 # Define here the models for your scraped items
 #
 # See documentation in:
-# https://doc.scrapy.org/en/latest/topics/items.html
+# http://doc.scrapy.org/en/latest/topics/items.html
 
+from scrapy import Item, Field
 
-from scrapy import Item,Field
 
 class UserItem(Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
     id = Field()
     name = Field()
     avatar_url = Field()
     headline = Field()
     description = Field()
-    url_token = Field()
     url = Field()
+    url_token = Field()
     gender = Field()
-    conver_url = Field()
+    cover_url = Field()
     type = Field()
     badge = Field()
+
     answer_count = Field()
     articles_count = Field()
     commercial_question_count = Field()
@@ -49,3 +49,4 @@ class UserItem(Item):
     locations = Field()
     educations = Field()
     employments = Field()
+

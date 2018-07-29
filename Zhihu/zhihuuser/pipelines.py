@@ -3,11 +3,17 @@
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-
+# See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import pymongo
 
+
+class ZhihuPipeline(object):
+    def process_item(self, item, spider):
+        return item
+
+
 class MongoPipeline(object):
+    collection_name = 'users'
 
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri
@@ -28,7 +34,5 @@ class MongoPipeline(object):
         self.client.close()
 
     def process_item(self, item, spider):
-        item['url'] = 'https://www.zhihu.com/people/{}/activities'.format(item['url_token'])
-        self.db['user'].update({'url_token':item['url_token']},{'$set':item},True)
-        print('\n\n\n\n\n\n\n保存数据可成功\n\n\n\n\n\n\n')
+        self.db[self.collection_name].update({'url_token': item['url_token']}, dict(item), True)
         return item
